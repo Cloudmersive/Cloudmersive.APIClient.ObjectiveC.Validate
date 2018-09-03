@@ -1,4 +1,4 @@
 ﻿Remove-Item –path ./client –recurse
-& java -jar swagger-codegen-cli.jar generate -i https://api.cloudmersive.com/swagger/api/virus -l objc -o client -c packageconfig.json
-(Get-Content ./client/CloudmersiveVirusApiClient.podspec).replace('CloudmersiveVirusApiClient/**/*.{m,h}', "client/CloudmersiveVirusApiClient/**/*.{m,h}") | Set-Content ./client/CloudmersiveVirusApiClient.podspec
-(Get-Content ./client/CloudmersiveVirusApiClient.podspec).replace('CloudmersiveVirusApiClient/**/*.h', "client/CloudmersiveVirusApiClient/**/*.h") | Set-Content ./client/CloudmersiveVirusApiClient.podspec
+& java -jar swagger-codegen-cli.jar generate -i https://api.cloudmersive.com/swagger/api/validate -l objc -o client -c packageconfig.json
+(Get-Content ./client/CloudmersiveValidateApiClient.podspec).replace('CloudmersiveValidateApiClient/**/*.{m,h}', "client/CloudmersiveValidateApiClient/**/*.{m,h}") | Set-Content ./client/CloudmersiveValidateApiClient.podspec
+(Get-Content ./client/CloudmersiveValidateApiClient.podspec).replace('CloudmersiveValidateApiClient/**/*.h', "client/CloudmersiveValidateApiClient/**/*.h") | Set-Content ./client/CloudmersiveValidateApiClient.podspec
