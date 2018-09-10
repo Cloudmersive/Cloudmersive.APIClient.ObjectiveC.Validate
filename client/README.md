@@ -44,8 +44,16 @@ Import the following:
 #import <CloudmersiveValidateApiClient/CMAddressGetServersResponse.h>
 #import <CloudmersiveValidateApiClient/CMAddressVerifySyntaxOnlyResponse.h>
 #import <CloudmersiveValidateApiClient/CMCheckResponse.h>
+#import <CloudmersiveValidateApiClient/CMFirstNameValidationRequest.h>
+#import <CloudmersiveValidateApiClient/CMFirstNameValidationResponse.h>
 #import <CloudmersiveValidateApiClient/CMFullEmailValidationResponse.h>
+#import <CloudmersiveValidateApiClient/CMFullNameValidationRequest.h>
+#import <CloudmersiveValidateApiClient/CMFullNameValidationResponse.h>
 #import <CloudmersiveValidateApiClient/CMGeolocateResponse.h>
+#import <CloudmersiveValidateApiClient/CMGetGenderRequest.h>
+#import <CloudmersiveValidateApiClient/CMGetGenderResponse.h>
+#import <CloudmersiveValidateApiClient/CMLastNameValidationRequest.h>
+#import <CloudmersiveValidateApiClient/CMLastNameValidationResponse.h>
 #import <CloudmersiveValidateApiClient/CMPhoneNumberValidateRequest.h>
 #import <CloudmersiveValidateApiClient/CMPhoneNumberValidationResponse.h>
 #import <CloudmersiveValidateApiClient/CMVatLookupRequest.h>
@@ -55,6 +63,7 @@ Import the following:
 #import <CloudmersiveValidateApiClient/CMDomainApi.h>
 #import <CloudmersiveValidateApiClient/CMEmailApi.h>
 #import <CloudmersiveValidateApiClient/CMIPAddressApi.h>
+#import <CloudmersiveValidateApiClient/CMNameApi.h>
 #import <CloudmersiveValidateApiClient/CMPhoneNumberApi.h>
 #import <CloudmersiveValidateApiClient/CMVatApi.h>
 
@@ -107,6 +116,10 @@ Class | Method | HTTP request | Description
 *CMEmailApi* | [**emailFullValidation**](docs/CMEmailApi.md#emailfullvalidation) | **POST** /validate/email/address/full | Fully validate an email address
 *CMEmailApi* | [**emailPost**](docs/CMEmailApi.md#emailpost) | **POST** /validate/email/address/syntaxOnly | Validate email adddress for syntactic correctness only
 *CMIPAddressApi* | [**iPAddressPost**](docs/CMIPAddressApi.md#ipaddresspost) | **POST** /validate/ip/geolocate | Geolocate an IP address
+*CMNameApi* | [**nameGetGender**](docs/CMNameApi.md#namegetgender) | **POST** /validate/name/get-gender | Get the gender of a first name
+*CMNameApi* | [**nameValidateFirstName**](docs/CMNameApi.md#namevalidatefirstname) | **POST** /validate/name/first | Validate a first name
+*CMNameApi* | [**nameValidateFullName**](docs/CMNameApi.md#namevalidatefullname) | **POST** /validate/name/full-name | Parse and validate a full name
+*CMNameApi* | [**nameValidateLastName**](docs/CMNameApi.md#namevalidatelastname) | **POST** /validate/name/last | Validate a last name
 *CMPhoneNumberApi* | [**phoneNumberSyntaxOnly**](docs/CMPhoneNumberApi.md#phonenumbersyntaxonly) | **POST** /validate/phonenumber/basic | Validate phone number (basic)
 *CMVatApi* | [**vatVatLookup**](docs/CMVatApi.md#vatvatlookup) | **POST** /validate/vat/lookup | Lookup a VAT code
 
@@ -116,8 +129,16 @@ Class | Method | HTTP request | Description
  - [CMAddressGetServersResponse](docs/CMAddressGetServersResponse.md)
  - [CMAddressVerifySyntaxOnlyResponse](docs/CMAddressVerifySyntaxOnlyResponse.md)
  - [CMCheckResponse](docs/CMCheckResponse.md)
+ - [CMFirstNameValidationRequest](docs/CMFirstNameValidationRequest.md)
+ - [CMFirstNameValidationResponse](docs/CMFirstNameValidationResponse.md)
  - [CMFullEmailValidationResponse](docs/CMFullEmailValidationResponse.md)
+ - [CMFullNameValidationRequest](docs/CMFullNameValidationRequest.md)
+ - [CMFullNameValidationResponse](docs/CMFullNameValidationResponse.md)
  - [CMGeolocateResponse](docs/CMGeolocateResponse.md)
+ - [CMGetGenderRequest](docs/CMGetGenderRequest.md)
+ - [CMGetGenderResponse](docs/CMGetGenderResponse.md)
+ - [CMLastNameValidationRequest](docs/CMLastNameValidationRequest.md)
+ - [CMLastNameValidationResponse](docs/CMLastNameValidationResponse.md)
  - [CMPhoneNumberValidateRequest](docs/CMPhoneNumberValidateRequest.md)
  - [CMPhoneNumberValidationResponse](docs/CMPhoneNumberValidationResponse.md)
  - [CMVatLookupRequest](docs/CMVatLookupRequest.md)
