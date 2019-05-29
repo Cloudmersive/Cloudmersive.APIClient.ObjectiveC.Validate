@@ -22,11 +22,26 @@
 
 @interface CMFullEmailValidationResponse : CMObject
 
-/* True if the email address is valid, false otherwise [optional]
+/* True if the email address is valid overall, false otherwise [optional]
  */
 @property(nonatomic) NSNumber* validAddress;
 /* Email server connected to for verification [optional]
  */
 @property(nonatomic) NSString* mailServerUsedForValidation;
+/* True if the syntax of the email address is valid, false otherwise.  This is one component of ValidAddress, but not the only one. [optional]
+ */
+@property(nonatomic) NSNumber* validSyntax;
+/* True if the domain name of the email address is valid, false otherwise.  This is one component of ValidAddress, but not the only one. [optional]
+ */
+@property(nonatomic) NSNumber* validDomain;
+/* True if the email address was verified by the remote server, false otherwise.  This is one component of ValidAddress, but not the only one. [optional]
+ */
+@property(nonatomic) NSNumber* validSMTP;
+/* True if the domain is a catch-all domain name, false otherwise.  Catch-all domain names, while rare, always accept inbound email to ensure they do not lose any potentially useful emails.  Catch-all domain names can occassionally be configured to first accept and store all inbound email, but then later send a bounce email back to the sender after a delayed period of time. [optional]
+ */
+@property(nonatomic) NSNumber* isCatchallDomain;
+/* Domain name of the email address [optional]
+ */
+@property(nonatomic) NSString* domain;
 
 @end

@@ -17,7 +17,7 @@
  * This method is used by `JSONModel`.
  */
 + (JSONKeyMapper *)keyMapper {
-  return [[JSONKeyMapper alloc] initWithModelToJSONDictionary:@{ @"validAddress": @"ValidAddress", @"mailServerUsedForValidation": @"MailServerUsedForValidation" }];
+  return [[JSONKeyMapper alloc] initWithModelToJSONDictionary:@{ @"validAddress": @"ValidAddress", @"mailServerUsedForValidation": @"MailServerUsedForValidation", @"validSyntax": @"Valid_Syntax", @"validDomain": @"Valid_Domain", @"validSMTP": @"Valid_SMTP", @"isCatchallDomain": @"IsCatchallDomain", @"domain": @"Domain" }];
 }
 
 /**
@@ -27,7 +27,7 @@
  */
 + (BOOL)propertyIsOptional:(NSString *)propertyName {
 
-  NSArray *optionalProperties = @[@"validAddress", @"mailServerUsedForValidation"];
+  NSArray *optionalProperties = @[@"validAddress", @"mailServerUsedForValidation", @"validSyntax", @"validDomain", @"validSMTP", @"isCatchallDomain", @"domain"];
   return [optionalProperties containsObject:propertyName];
 }
 
