@@ -54,12 +54,17 @@ Import the following:
 #import <CloudmersiveValidateApiClient/CMGetGenderResponse.h>
 #import <CloudmersiveValidateApiClient/CMLastNameValidationRequest.h>
 #import <CloudmersiveValidateApiClient/CMLastNameValidationResponse.h>
+#import <CloudmersiveValidateApiClient/CMParseAddressRequest.h>
+#import <CloudmersiveValidateApiClient/CMParseAddressResponse.h>
 #import <CloudmersiveValidateApiClient/CMPhoneNumberValidateRequest.h>
 #import <CloudmersiveValidateApiClient/CMPhoneNumberValidationResponse.h>
+#import <CloudmersiveValidateApiClient/CMValidateUrlRequestSyntaxOnly.h>
+#import <CloudmersiveValidateApiClient/CMValidateUrlResponseSyntaxOnly.h>
 #import <CloudmersiveValidateApiClient/CMVatLookupRequest.h>
 #import <CloudmersiveValidateApiClient/CMVatLookupResponse.h>
 #import <CloudmersiveValidateApiClient/CMWhoisResponse.h>
 // load API classes for accessing endpoints
+#import <CloudmersiveValidateApiClient/CMAddressApi.h>
 #import <CloudmersiveValidateApiClient/CMDomainApi.h>
 #import <CloudmersiveValidateApiClient/CMEmailApi.h>
 #import <CloudmersiveValidateApiClient/CMIPAddressApi.h>
@@ -87,13 +92,13 @@ CMDefaultConfiguration *apiConfig = [CMDefaultConfiguration sharedConfig];
 //[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"Apikey"];
 
 
-NSString* *domain = domain_example; // Domain name to check, for example \"cloudmersive.com\".  The input is a string so be sure to enclose it in double-quotes.
+CMParseAddressRequest* *input = [[CMParseAddressRequest alloc] init]; // Input parse request
 
-CMDomainApi *apiInstance = [[CMDomainApi alloc] init];
+CMAddressApi *apiInstance = [[CMAddressApi alloc] init];
 
-// Validate a domain name
-[apiInstance domainCheckWithDomain:domain
-              completionHandler: ^(CMCheckResponse* output, NSError* error) {
+// Parse an unstructured input text string into an international, formatted address
+[apiInstance addressParseStringWithInput:input
+              completionHandler: ^(CMParseAddressResponse* output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
                             }
@@ -110,8 +115,10 @@ All URIs are relative to *https://api.cloudmersive.com*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*CMAddressApi* | [**addressParseString**](docs/CMAddressApi.md#addressparsestring) | **POST** /validate/address/parse | Parse an unstructured input text string into an international, formatted address
 *CMDomainApi* | [**domainCheck**](docs/CMDomainApi.md#domaincheck) | **POST** /validate/domain/check | Validate a domain name
 *CMDomainApi* | [**domainPost**](docs/CMDomainApi.md#domainpost) | **POST** /validate/domain/whois | Get WHOIS information for a domain
+*CMDomainApi* | [**domainUrlSyntaxOnly**](docs/CMDomainApi.md#domainurlsyntaxonly) | **POST** /validate/domain/url/syntax-only | Validate a URL syntactically
 *CMEmailApi* | [**emailAddressGetServers**](docs/CMEmailApi.md#emailaddressgetservers) | **POST** /validate/email/address/servers | Partially check whether an email address is valid
 *CMEmailApi* | [**emailFullValidation**](docs/CMEmailApi.md#emailfullvalidation) | **POST** /validate/email/address/full | Fully validate an email address
 *CMEmailApi* | [**emailPost**](docs/CMEmailApi.md#emailpost) | **POST** /validate/email/address/syntaxOnly | Validate email adddress for syntactic correctness only
@@ -139,8 +146,12 @@ Class | Method | HTTP request | Description
  - [CMGetGenderResponse](docs/CMGetGenderResponse.md)
  - [CMLastNameValidationRequest](docs/CMLastNameValidationRequest.md)
  - [CMLastNameValidationResponse](docs/CMLastNameValidationResponse.md)
+ - [CMParseAddressRequest](docs/CMParseAddressRequest.md)
+ - [CMParseAddressResponse](docs/CMParseAddressResponse.md)
  - [CMPhoneNumberValidateRequest](docs/CMPhoneNumberValidateRequest.md)
  - [CMPhoneNumberValidationResponse](docs/CMPhoneNumberValidationResponse.md)
+ - [CMValidateUrlRequestSyntaxOnly](docs/CMValidateUrlRequestSyntaxOnly.md)
+ - [CMValidateUrlResponseSyntaxOnly](docs/CMValidateUrlResponseSyntaxOnly.md)
  - [CMVatLookupRequest](docs/CMVatLookupRequest.md)
  - [CMVatLookupResponse](docs/CMVatLookupResponse.md)
  - [CMWhoisResponse](docs/CMWhoisResponse.md)

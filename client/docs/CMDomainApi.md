@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**domainCheck**](CMDomainApi.md#domaincheck) | **POST** /validate/domain/check | Validate a domain name
 [**domainPost**](CMDomainApi.md#domainpost) | **POST** /validate/domain/whois | Get WHOIS information for a domain
+[**domainUrlSyntaxOnly**](CMDomainApi.md#domainurlsyntaxonly) | **POST** /validate/domain/url/syntax-only | Validate a URL syntactically
 
 
 # **domainCheck**
@@ -110,6 +111,63 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**CMWhoisResponse***](CMWhoisResponse.md)
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json, text/json, application/xml, text/xml, application/x-www-form-urlencoded
+ - **Accept**: application/json, text/json, application/xml, text/xml
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **domainUrlSyntaxOnly**
+```objc
+-(NSURLSessionTask*) domainUrlSyntaxOnlyWithRequest: (CMValidateUrlRequestSyntaxOnly*) request
+        completionHandler: (void (^)(CMValidateUrlResponseSyntaxOnly* output, NSError* error)) handler;
+```
+
+Validate a URL syntactically
+
+Validate whether a URL is syntactically valid (does not check endpoint for validity).  Accepts various types of input and produces a well-formed URL as output.
+
+### Example 
+```objc
+CMDefaultConfiguration *apiConfig = [CMDefaultConfiguration sharedConfig];
+
+// Configure API key authorization: (authentication scheme: Apikey)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Apikey"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"Apikey"];
+
+
+CMValidateUrlRequestSyntaxOnly* request = [[CMValidateUrlRequestSyntaxOnly alloc] init]; // 
+
+CMDomainApi*apiInstance = [[CMDomainApi alloc] init];
+
+// Validate a URL syntactically
+[apiInstance domainUrlSyntaxOnlyWithRequest:request
+          completionHandler: ^(CMValidateUrlResponseSyntaxOnly* output, NSError* error) {
+                        if (output) {
+                            NSLog(@"%@", output);
+                        }
+                        if (error) {
+                            NSLog(@"Error calling CMDomainApi->domainUrlSyntaxOnly: %@", error);
+                        }
+                    }];
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **request** | [**CMValidateUrlRequestSyntaxOnly***](CMValidateUrlRequestSyntaxOnly.md)|  | 
+
+### Return type
+
+[**CMValidateUrlResponseSyntaxOnly***](CMValidateUrlResponseSyntaxOnly.md)
 
 ### Authorization
 

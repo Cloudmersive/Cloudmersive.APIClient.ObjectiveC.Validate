@@ -17,7 +17,7 @@
  * This method is used by `JSONModel`.
  */
 + (JSONKeyMapper *)keyMapper {
-  return [[JSONKeyMapper alloc] initWithModelToJSONDictionary:@{ @"validAddress": @"ValidAddress", @"mailServerUsedForValidation": @"MailServerUsedForValidation", @"validSyntax": @"Valid_Syntax", @"validDomain": @"Valid_Domain", @"validSMTP": @"Valid_SMTP", @"isCatchallDomain": @"IsCatchallDomain", @"domain": @"Domain" }];
+  return [[JSONKeyMapper alloc] initWithModelToJSONDictionary:@{ @"validAddress": @"ValidAddress", @"mailServerUsedForValidation": @"MailServerUsedForValidation", @"validSyntax": @"Valid_Syntax", @"validDomain": @"Valid_Domain", @"validSMTP": @"Valid_SMTP", @"isCatchallDomain": @"IsCatchallDomain", @"domain": @"Domain", @"isFreeEmailProvider": @"IsFreeEmailProvider", @"isDisposable": @"IsDisposable" }];
 }
 
 /**
@@ -27,7 +27,7 @@
  */
 + (BOOL)propertyIsOptional:(NSString *)propertyName {
 
-  NSArray *optionalProperties = @[@"validAddress", @"mailServerUsedForValidation", @"validSyntax", @"validDomain", @"validSMTP", @"isCatchallDomain", @"domain"];
+  NSArray *optionalProperties = @[@"validAddress", @"mailServerUsedForValidation", @"validSyntax", @"validDomain", @"validSMTP", @"isCatchallDomain", @"domain", @"isFreeEmailProvider", @"isDisposable"];
   return [optionalProperties containsObject:propertyName];
 }
 
