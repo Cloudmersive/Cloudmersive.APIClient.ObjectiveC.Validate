@@ -1,6 +1,8 @@
 #import <Foundation/Foundation.h>
 #import "CMCheckResponse.h"
+#import "CMValidateUrlRequestFull.h"
 #import "CMValidateUrlRequestSyntaxOnly.h"
+#import "CMValidateUrlResponseFull.h"
 #import "CMValidateUrlResponseSyntaxOnly.h"
 #import "CMWhoisResponse.h"
 #import "CMApi.h"
@@ -50,10 +52,22 @@ extern NSInteger kCMDomainApiMissingParamErrorCode;
     completionHandler: (void (^)(CMWhoisResponse* output, NSError* error)) handler;
 
 
+/// Validate a URL fully
+/// Validate whether a URL is syntactically valid (does not check endpoint for validity), whether it exists, and whether the endpoint is up and passes virus scan checks.  Accepts various types of input and produces a well-formed URL as output.
+///
+/// @param request Input URL request
+/// 
+///  code:200 message:"OK"
+///
+/// @return CMValidateUrlResponseFull*
+-(NSURLSessionTask*) domainUrlFullWithRequest: (CMValidateUrlRequestFull*) request
+    completionHandler: (void (^)(CMValidateUrlResponseFull* output, NSError* error)) handler;
+
+
 /// Validate a URL syntactically
 /// Validate whether a URL is syntactically valid (does not check endpoint for validity).  Accepts various types of input and produces a well-formed URL as output.
 ///
-/// @param request 
+/// @param request Input URL information
 /// 
 ///  code:200 message:"OK"
 ///

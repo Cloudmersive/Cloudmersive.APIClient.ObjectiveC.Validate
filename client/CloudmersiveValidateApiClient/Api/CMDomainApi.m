@@ -2,7 +2,9 @@
 #import "CMQueryParamCollection.h"
 #import "CMApiClient.h"
 #import "CMCheckResponse.h"
+#import "CMValidateUrlRequestFull.h"
 #import "CMValidateUrlRequestSyntaxOnly.h"
+#import "CMValidateUrlResponseFull.h"
 #import "CMValidateUrlResponseSyntaxOnly.h"
 #import "CMWhoisResponse.h"
 
@@ -89,7 +91,7 @@ NSInteger kCMDomainApiMissingParamErrorCode = 234513;
     NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
 
     // request content type
-    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[@"application/json", @"text/json", @"application/xml", @"text/xml", @"application/x-www-form-urlencoded"]];
+    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[@"text/javascript", @"application/json", @"text/json"]];
 
     // Authentication setting
     NSArray *authSettings = @[@"Apikey"];
@@ -155,7 +157,7 @@ NSInteger kCMDomainApiMissingParamErrorCode = 234513;
     NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
 
     // request content type
-    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[@"application/json", @"text/json", @"application/xml", @"text/xml", @"application/x-www-form-urlencoded"]];
+    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[@"text/javascript", @"application/json", @"text/json"]];
 
     // Authentication setting
     NSArray *authSettings = @[@"Apikey"];
@@ -185,9 +187,75 @@ NSInteger kCMDomainApiMissingParamErrorCode = 234513;
 }
 
 ///
+/// Validate a URL fully
+/// Validate whether a URL is syntactically valid (does not check endpoint for validity), whether it exists, and whether the endpoint is up and passes virus scan checks.  Accepts various types of input and produces a well-formed URL as output.
+///  @param request Input URL request 
+///
+///  @returns CMValidateUrlResponseFull*
+///
+-(NSURLSessionTask*) domainUrlFullWithRequest: (CMValidateUrlRequestFull*) request
+    completionHandler: (void (^)(CMValidateUrlResponseFull* output, NSError* error)) handler {
+    // verify the required parameter 'request' is set
+    if (request == nil) {
+        NSParameterAssert(request);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"request"] };
+            NSError* error = [NSError errorWithDomain:kCMDomainApiErrorDomain code:kCMDomainApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/validate/domain/url/full"];
+
+    NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
+
+    NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
+    [headerParams addEntriesFromDictionary:self.defaultHeaders];
+    // HTTP header `Accept`
+    NSString *acceptHeader = [self.apiClient.sanitizer selectHeaderAccept:@[@"application/json", @"text/json", @"application/xml", @"text/xml"]];
+    if(acceptHeader.length > 0) {
+        headerParams[@"Accept"] = acceptHeader;
+    }
+
+    // response content type
+    NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
+
+    // request content type
+    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[@"application/json", @"text/json"]];
+
+    // Authentication setting
+    NSArray *authSettings = @[@"Apikey"];
+
+    id bodyParam = nil;
+    NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
+    bodyParam = request;
+
+    return [self.apiClient requestWithPath: resourcePath
+                                    method: @"POST"
+                                pathParams: pathParams
+                               queryParams: queryParams
+                                formParams: formParams
+                                     files: localVarFiles
+                                      body: bodyParam
+                              headerParams: headerParams
+                              authSettings: authSettings
+                        requestContentType: requestContentType
+                       responseContentType: responseContentType
+                              responseType: @"CMValidateUrlResponseFull*"
+                           completionBlock: ^(id data, NSError *error) {
+                                if(handler) {
+                                    handler((CMValidateUrlResponseFull*)data, error);
+                                }
+                            }];
+}
+
+///
 /// Validate a URL syntactically
 /// Validate whether a URL is syntactically valid (does not check endpoint for validity).  Accepts various types of input and produces a well-formed URL as output.
-///  @param request  
+///  @param request Input URL information 
 ///
 ///  @returns CMValidateUrlResponseSyntaxOnly*
 ///
@@ -221,7 +289,7 @@ NSInteger kCMDomainApiMissingParamErrorCode = 234513;
     NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
 
     // request content type
-    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[@"application/json", @"text/json", @"application/xml", @"text/xml", @"application/x-www-form-urlencoded"]];
+    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[@"application/json", @"text/json"]];
 
     // Authentication setting
     NSArray *authSettings = @[@"Apikey"];

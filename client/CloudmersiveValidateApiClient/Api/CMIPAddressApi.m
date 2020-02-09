@@ -86,7 +86,7 @@ NSInteger kCMIPAddressApiMissingParamErrorCode = 234513;
     NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
 
     // request content type
-    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[@"application/json", @"text/json", @"application/xml", @"text/xml", @"application/x-www-form-urlencoded"]];
+    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[@"text/javascript", @"application/json", @"text/json"]];
 
     // Authentication setting
     NSArray *authSettings = @[@"Apikey"];

@@ -25,6 +25,39 @@
 /* True if the domain is valid, false if it is not [optional]
  */
 @property(nonatomic) NSNumber* validDomain;
+/* Name of the domain registrant [optional]
+ */
+@property(nonatomic) NSString* registrantName;
+/* Organization name of the domain registrant [optional]
+ */
+@property(nonatomic) NSString* registrantOrganization;
+/* Email address of the domain registrant [optional]
+ */
+@property(nonatomic) NSString* registrantEmail;
+/* Street number of the address of the domain registrant, if available [optional]
+ */
+@property(nonatomic) NSString* registrantStreetNumber;
+/* Street name of the address of the domain registrant, if available [optional]
+ */
+@property(nonatomic) NSString* registrantStreet;
+/* City of the domain registrant, if available [optional]
+ */
+@property(nonatomic) NSString* registrantCity;
+/* State or Province of the address of the domain registrant, if available [optional]
+ */
+@property(nonatomic) NSString* registrantStateOrProvince;
+/* Postal code of the address of the domain registrant, if available [optional]
+ */
+@property(nonatomic) NSString* registrantPostalCode;
+/* Country of the address of the domain registrant, if available [optional]
+ */
+@property(nonatomic) NSString* registrantCountry;
+/* Raw address string of the domain registrant, if available [optional]
+ */
+@property(nonatomic) NSString* registrantRawAddress;
+/* Telephone number of the address of the domain registrant [optional]
+ */
+@property(nonatomic) NSString* registrantTelephone;
 /* Server used to lookup WHOIS information (may change based on lookup). [optional]
  */
 @property(nonatomic) NSString* whoisServer;

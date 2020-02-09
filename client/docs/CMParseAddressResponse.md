@@ -10,7 +10,8 @@ Name | Type | Description | Notes
 **city** | **NSString*** | The city of the address. | [optional] 
 **stateOrProvince** | **NSString*** | The state or province of the address. | [optional] 
 **postalCode** | **NSString*** | The postal code or zip code of the address. | [optional] 
-**country** | **NSString*** | Country of the address, if present in the address.  If not included in the address it will be null. | [optional] 
+**countryFullName** | **NSString*** | Country of the address, if present in the address.  If not included in the address it will be null. | [optional] 
+**iSOTwoLetterCode** | **NSString*** | Two-letter ISO 3166-1 country code | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

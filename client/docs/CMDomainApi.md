@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**domainCheck**](CMDomainApi.md#domaincheck) | **POST** /validate/domain/check | Validate a domain name
 [**domainPost**](CMDomainApi.md#domainpost) | **POST** /validate/domain/whois | Get WHOIS information for a domain
+[**domainUrlFull**](CMDomainApi.md#domainurlfull) | **POST** /validate/domain/url/full | Validate a URL fully
 [**domainUrlSyntaxOnly**](CMDomainApi.md#domainurlsyntaxonly) | **POST** /validate/domain/url/syntax-only | Validate a URL syntactically
 
 
@@ -61,7 +62,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/json, application/xml, text/xml, application/x-www-form-urlencoded
+ - **Content-Type**: text/javascript, application/json, text/json
  - **Accept**: application/json, text/json, application/xml, text/xml
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -118,7 +119,64 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/json, application/xml, text/xml, application/x-www-form-urlencoded
+ - **Content-Type**: text/javascript, application/json, text/json
+ - **Accept**: application/json, text/json, application/xml, text/xml
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **domainUrlFull**
+```objc
+-(NSURLSessionTask*) domainUrlFullWithRequest: (CMValidateUrlRequestFull*) request
+        completionHandler: (void (^)(CMValidateUrlResponseFull* output, NSError* error)) handler;
+```
+
+Validate a URL fully
+
+Validate whether a URL is syntactically valid (does not check endpoint for validity), whether it exists, and whether the endpoint is up and passes virus scan checks.  Accepts various types of input and produces a well-formed URL as output.
+
+### Example 
+```objc
+CMDefaultConfiguration *apiConfig = [CMDefaultConfiguration sharedConfig];
+
+// Configure API key authorization: (authentication scheme: Apikey)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Apikey"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"Apikey"];
+
+
+CMValidateUrlRequestFull* request = [[CMValidateUrlRequestFull alloc] init]; // Input URL request
+
+CMDomainApi*apiInstance = [[CMDomainApi alloc] init];
+
+// Validate a URL fully
+[apiInstance domainUrlFullWithRequest:request
+          completionHandler: ^(CMValidateUrlResponseFull* output, NSError* error) {
+                        if (output) {
+                            NSLog(@"%@", output);
+                        }
+                        if (error) {
+                            NSLog(@"Error calling CMDomainApi->domainUrlFull: %@", error);
+                        }
+                    }];
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **request** | [**CMValidateUrlRequestFull***](CMValidateUrlRequestFull.md)| Input URL request | 
+
+### Return type
+
+[**CMValidateUrlResponseFull***](CMValidateUrlResponseFull.md)
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json, text/json
  - **Accept**: application/json, text/json, application/xml, text/xml
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -143,7 +201,7 @@ CMDefaultConfiguration *apiConfig = [CMDefaultConfiguration sharedConfig];
 //[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"Apikey"];
 
 
-CMValidateUrlRequestSyntaxOnly* request = [[CMValidateUrlRequestSyntaxOnly alloc] init]; // 
+CMValidateUrlRequestSyntaxOnly* request = [[CMValidateUrlRequestSyntaxOnly alloc] init]; // Input URL information
 
 CMDomainApi*apiInstance = [[CMDomainApi alloc] init];
 
@@ -163,7 +221,7 @@ CMDomainApi*apiInstance = [[CMDomainApi alloc] init];
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **request** | [**CMValidateUrlRequestSyntaxOnly***](CMValidateUrlRequestSyntaxOnly.md)|  | 
+ **request** | [**CMValidateUrlRequestSyntaxOnly***](CMValidateUrlRequestSyntaxOnly.md)| Input URL information | 
 
 ### Return type
 
@@ -175,7 +233,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/json, application/xml, text/xml, application/x-www-form-urlencoded
+ - **Content-Type**: application/json, text/json
  - **Accept**: application/json, text/json, application/xml, text/xml
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

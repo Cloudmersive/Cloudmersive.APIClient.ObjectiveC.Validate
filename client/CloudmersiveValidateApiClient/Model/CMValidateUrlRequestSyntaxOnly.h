@@ -22,7 +22,8 @@
 
 @interface CMValidateUrlRequestSyntaxOnly : CMObject
 
-
+/* URL to validate [optional]
+ */
 @property(nonatomic) NSString* uRL;
 
 @end

@@ -22,7 +22,8 @@
 
 @interface CMVatLookupRequest : CMObject
 
-
+/* VAT code to lookup; example \"CZ25123891\" [optional]
+ */
 @property(nonatomic) NSString* vatCode;
 
 @end

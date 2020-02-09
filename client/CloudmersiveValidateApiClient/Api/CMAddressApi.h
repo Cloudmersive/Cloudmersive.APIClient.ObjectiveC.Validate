@@ -1,6 +1,12 @@
 #import <Foundation/Foundation.h>
+#import "CMGetTimezonesRequest.h"
+#import "CMGetTimezonesResponse.h"
 #import "CMParseAddressRequest.h"
 #import "CMParseAddressResponse.h"
+#import "CMValidateAddressRequest.h"
+#import "CMValidateAddressResponse.h"
+#import "CMValidateCountryRequest.h"
+#import "CMValidateCountryResponse.h"
 #import "CMApi.h"
 
 /**
@@ -24,6 +30,30 @@ extern NSInteger kCMAddressApiMissingParamErrorCode;
 
 -(instancetype) initWithApiClient:(CMApiClient *)apiClient NS_DESIGNATED_INITIALIZER;
 
+/// Validate and normalize country information, return ISO 3166-1 country codes and country name
+/// Validates and normalizes country information, and returns key information about a country.  Also returns distinct time zones in the country.
+///
+/// @param input Input request
+/// 
+///  code:200 message:"OK"
+///
+/// @return CMValidateCountryResponse*
+-(NSURLSessionTask*) addressCountryWithInput: (CMValidateCountryRequest*) input
+    completionHandler: (void (^)(CMValidateCountryResponse* output, NSError* error)) handler;
+
+
+/// Gets IANA/Olsen time zones for a country
+/// Gets the IANA/Olsen time zones for a country.
+///
+/// @param input Input request
+/// 
+///  code:200 message:"OK"
+///
+/// @return CMGetTimezonesResponse*
+-(NSURLSessionTask*) addressGetTimezoneWithInput: (CMGetTimezonesRequest*) input
+    completionHandler: (void (^)(CMGetTimezonesResponse* output, NSError* error)) handler;
+
+
 /// Parse an unstructured input text string into an international, formatted address
 /// Uses machine learning and Natural Language Processing (NLP) to handle a wide array of cases, including non-standard and unstructured address strings across a wide array of countries and address formatting norms.
 ///
@@ -34,6 +64,18 @@ extern NSInteger kCMAddressApiMissingParamErrorCode;
 /// @return CMParseAddressResponse*
 -(NSURLSessionTask*) addressParseStringWithInput: (CMParseAddressRequest*) input
     completionHandler: (void (^)(CMParseAddressResponse* output, NSError* error)) handler;
+
+
+/// Validate a street address
+/// Determines if an input structured street address is valid or invalid.  If the address is valid, also returns the latitude and longitude of the address.
+///
+/// @param input Input parse request
+/// 
+///  code:200 message:"OK"
+///
+/// @return CMValidateAddressResponse*
+-(NSURLSessionTask*) addressValidateAddressWithInput: (CMValidateAddressRequest*) input
+    completionHandler: (void (^)(CMValidateAddressResponse* output, NSError* error)) handler;
 
 
 

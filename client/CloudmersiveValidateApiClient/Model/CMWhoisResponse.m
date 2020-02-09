@@ -17,7 +17,7 @@
  * This method is used by `JSONModel`.
  */
 + (JSONKeyMapper *)keyMapper {
-  return [[JSONKeyMapper alloc] initWithModelToJSONDictionary:@{ @"validDomain": @"ValidDomain", @"whoisServer": @"WhoisServer", @"rawTextRecord": @"RawTextRecord", @"createdDt": @"CreatedDt" }];
+  return [[JSONKeyMapper alloc] initWithModelToJSONDictionary:@{ @"validDomain": @"ValidDomain", @"registrantName": @"RegistrantName", @"registrantOrganization": @"RegistrantOrganization", @"registrantEmail": @"RegistrantEmail", @"registrantStreetNumber": @"RegistrantStreetNumber", @"registrantStreet": @"RegistrantStreet", @"registrantCity": @"RegistrantCity", @"registrantStateOrProvince": @"RegistrantStateOrProvince", @"registrantPostalCode": @"RegistrantPostalCode", @"registrantCountry": @"RegistrantCountry", @"registrantRawAddress": @"RegistrantRawAddress", @"registrantTelephone": @"RegistrantTelephone", @"whoisServer": @"WhoisServer", @"rawTextRecord": @"RawTextRecord", @"createdDt": @"CreatedDt" }];
 }
 
 /**
@@ -27,7 +27,7 @@
  */
 + (BOOL)propertyIsOptional:(NSString *)propertyName {
 
-  NSArray *optionalProperties = @[@"validDomain", @"whoisServer", @"rawTextRecord", @"createdDt"];
+  NSArray *optionalProperties = @[@"validDomain", @"registrantName", @"registrantOrganization", @"registrantEmail", @"registrantStreetNumber", @"registrantStreet", @"registrantCity", @"registrantStateOrProvince", @"registrantPostalCode", @"registrantCountry", @"registrantRawAddress", @"registrantTelephone", @"whoisServer", @"rawTextRecord", @"createdDt"];
   return [optionalProperties containsObject:propertyName];
 }
 

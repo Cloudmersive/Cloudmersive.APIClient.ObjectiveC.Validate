@@ -22,9 +22,11 @@
 
 @interface CMAddressGetServersResponse : CMObject
 
-
+/* True if partial address validation was successufl, false otherwise [optional]
+ */
 @property(nonatomic) NSNumber* success;
-
+/* Email servers for this email address [optional]
+ */
 @property(nonatomic) NSArray<NSString*>* servers;
 
 @end

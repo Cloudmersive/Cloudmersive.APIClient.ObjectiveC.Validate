@@ -7,6 +7,8 @@
 #import "CMGetGenderResponse.h"
 #import "CMLastNameValidationRequest.h"
 #import "CMLastNameValidationResponse.h"
+#import "CMValidateIdentifierRequest.h"
+#import "CMValidateIdentifierResponse.h"
 #import "CMApi.h"
 
 /**
@@ -40,6 +42,18 @@ extern NSInteger kCMNameApiMissingParamErrorCode;
 /// @return CMGetGenderResponse*
 -(NSURLSessionTask*) nameGetGenderWithInput: (CMGetGenderRequest*) input
     completionHandler: (void (^)(CMGetGenderResponse* output, NSError* error)) handler;
+
+
+/// Validate a code identifier
+/// Determines if the input name is a valid technical / code identifier.  Configure input rules such as whether whitespace, hyphens, underscores, etc. are allowed.  For example, a valid identifier might be \"helloWorld\" but not \"hello*World\".
+///
+/// @param input Identifier validation request information
+/// 
+///  code:200 message:"OK"
+///
+/// @return CMValidateIdentifierResponse*
+-(NSURLSessionTask*) nameIdentifierWithInput: (CMValidateIdentifierRequest*) input
+    completionHandler: (void (^)(CMValidateIdentifierResponse* output, NSError* error)) handler;
 
 
 /// Validate a first name

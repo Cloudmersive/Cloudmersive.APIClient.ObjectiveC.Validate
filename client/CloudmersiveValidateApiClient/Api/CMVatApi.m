@@ -51,8 +51,8 @@ NSInteger kCMVatApiMissingParamErrorCode = 234513;
 #pragma mark - Api Methods
 
 ///
-/// Lookup a VAT code
-/// Checks if a VAT code is valid, and if it is, returns more information about it
+/// Validate a VAT number
+/// Checks if a VAT code is valid, and if it is, returns more information about it.  The first two letters of the VAT number must be letters that indicate the country, such as LU20260743.  Possible country codes include Austria (AT), Belgium (BE), Bulgaria (BG), Cyprus (CY), Czech Republic (CZ), Germany (DE), Denmark (DK), Estonia (EE), Greece (EL), Spain (ES), Finland (FI), France (FR), United Kingdom (GB), Croatia (HR), Hungary (HU), Ireland (IE), Italy (IT), Lithuania (LT), Luxembourg (LU), Latvia (LV), Malta (MT), The Netherlands (NL), Poland (PL), Portugal (PT), Romania (RO), Sweden (SE), Slovenia (SI), Slovakia (SK).
 ///  @param input Input VAT code 
 ///
 ///  @returns CMVatLookupResponse*
@@ -87,7 +87,7 @@ NSInteger kCMVatApiMissingParamErrorCode = 234513;
     NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
 
     // request content type
-    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[@"application/json", @"text/json", @"application/xml", @"text/xml", @"application/x-www-form-urlencoded"]];
+    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[@"application/json", @"text/json"]];
 
     // Authentication setting
     NSArray *authSettings = @[@"Apikey"];

@@ -52,13 +52,28 @@ Import the following:
 #import <CloudmersiveValidateApiClient/CMGeolocateResponse.h>
 #import <CloudmersiveValidateApiClient/CMGetGenderRequest.h>
 #import <CloudmersiveValidateApiClient/CMGetGenderResponse.h>
+#import <CloudmersiveValidateApiClient/CMGetTimezonesRequest.h>
+#import <CloudmersiveValidateApiClient/CMGetTimezonesResponse.h>
 #import <CloudmersiveValidateApiClient/CMLastNameValidationRequest.h>
 #import <CloudmersiveValidateApiClient/CMLastNameValidationResponse.h>
+#import <CloudmersiveValidateApiClient/CMLeadEnrichmentRequest.h>
+#import <CloudmersiveValidateApiClient/CMLeadEnrichmentResponse.h>
 #import <CloudmersiveValidateApiClient/CMParseAddressRequest.h>
 #import <CloudmersiveValidateApiClient/CMParseAddressResponse.h>
 #import <CloudmersiveValidateApiClient/CMPhoneNumberValidateRequest.h>
 #import <CloudmersiveValidateApiClient/CMPhoneNumberValidationResponse.h>
+#import <CloudmersiveValidateApiClient/CMTimezone.h>
+#import <CloudmersiveValidateApiClient/CMUserAgentValidateRequest.h>
+#import <CloudmersiveValidateApiClient/CMUserAgentValidateResponse.h>
+#import <CloudmersiveValidateApiClient/CMValidateAddressRequest.h>
+#import <CloudmersiveValidateApiClient/CMValidateAddressResponse.h>
+#import <CloudmersiveValidateApiClient/CMValidateCountryRequest.h>
+#import <CloudmersiveValidateApiClient/CMValidateCountryResponse.h>
+#import <CloudmersiveValidateApiClient/CMValidateIdentifierRequest.h>
+#import <CloudmersiveValidateApiClient/CMValidateIdentifierResponse.h>
+#import <CloudmersiveValidateApiClient/CMValidateUrlRequestFull.h>
 #import <CloudmersiveValidateApiClient/CMValidateUrlRequestSyntaxOnly.h>
+#import <CloudmersiveValidateApiClient/CMValidateUrlResponseFull.h>
 #import <CloudmersiveValidateApiClient/CMValidateUrlResponseSyntaxOnly.h>
 #import <CloudmersiveValidateApiClient/CMVatLookupRequest.h>
 #import <CloudmersiveValidateApiClient/CMVatLookupResponse.h>
@@ -68,8 +83,10 @@ Import the following:
 #import <CloudmersiveValidateApiClient/CMDomainApi.h>
 #import <CloudmersiveValidateApiClient/CMEmailApi.h>
 #import <CloudmersiveValidateApiClient/CMIPAddressApi.h>
+#import <CloudmersiveValidateApiClient/CMLeadEnrichmentApi.h>
 #import <CloudmersiveValidateApiClient/CMNameApi.h>
 #import <CloudmersiveValidateApiClient/CMPhoneNumberApi.h>
+#import <CloudmersiveValidateApiClient/CMUserAgentApi.h>
 #import <CloudmersiveValidateApiClient/CMVatApi.h>
 
 ```
@@ -92,13 +109,13 @@ CMDefaultConfiguration *apiConfig = [CMDefaultConfiguration sharedConfig];
 //[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"Apikey"];
 
 
-CMParseAddressRequest* *input = [[CMParseAddressRequest alloc] init]; // Input parse request
+CMValidateCountryRequest* *input = [[CMValidateCountryRequest alloc] init]; // Input request
 
 CMAddressApi *apiInstance = [[CMAddressApi alloc] init];
 
-// Parse an unstructured input text string into an international, formatted address
-[apiInstance addressParseStringWithInput:input
-              completionHandler: ^(CMParseAddressResponse* output, NSError* error) {
+// Validate and normalize country information, return ISO 3166-1 country codes and country name
+[apiInstance addressCountryWithInput:input
+              completionHandler: ^(CMValidateCountryResponse* output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
                             }
@@ -115,20 +132,27 @@ All URIs are relative to *https://api.cloudmersive.com*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*CMAddressApi* | [**addressCountry**](docs/CMAddressApi.md#addresscountry) | **POST** /validate/address/country | Validate and normalize country information, return ISO 3166-1 country codes and country name
+*CMAddressApi* | [**addressGetTimezone**](docs/CMAddressApi.md#addressgettimezone) | **POST** /validate/address/country/get-timezones | Gets IANA/Olsen time zones for a country
 *CMAddressApi* | [**addressParseString**](docs/CMAddressApi.md#addressparsestring) | **POST** /validate/address/parse | Parse an unstructured input text string into an international, formatted address
+*CMAddressApi* | [**addressValidateAddress**](docs/CMAddressApi.md#addressvalidateaddress) | **POST** /validate/address/street-address | Validate a street address
 *CMDomainApi* | [**domainCheck**](docs/CMDomainApi.md#domaincheck) | **POST** /validate/domain/check | Validate a domain name
 *CMDomainApi* | [**domainPost**](docs/CMDomainApi.md#domainpost) | **POST** /validate/domain/whois | Get WHOIS information for a domain
+*CMDomainApi* | [**domainUrlFull**](docs/CMDomainApi.md#domainurlfull) | **POST** /validate/domain/url/full | Validate a URL fully
 *CMDomainApi* | [**domainUrlSyntaxOnly**](docs/CMDomainApi.md#domainurlsyntaxonly) | **POST** /validate/domain/url/syntax-only | Validate a URL syntactically
 *CMEmailApi* | [**emailAddressGetServers**](docs/CMEmailApi.md#emailaddressgetservers) | **POST** /validate/email/address/servers | Partially check whether an email address is valid
 *CMEmailApi* | [**emailFullValidation**](docs/CMEmailApi.md#emailfullvalidation) | **POST** /validate/email/address/full | Fully validate an email address
 *CMEmailApi* | [**emailPost**](docs/CMEmailApi.md#emailpost) | **POST** /validate/email/address/syntaxOnly | Validate email adddress for syntactic correctness only
 *CMIPAddressApi* | [**iPAddressPost**](docs/CMIPAddressApi.md#ipaddresspost) | **POST** /validate/ip/geolocate | Geolocate an IP address
+*CMLeadEnrichmentApi* | [**leadEnrichmentEnrichLead**](docs/CMLeadEnrichmentApi.md#leadenrichmentenrichlead) | **POST** /validate/lead-enrichment/lead/enrich | Enrich an input lead with additional fields of data
 *CMNameApi* | [**nameGetGender**](docs/CMNameApi.md#namegetgender) | **POST** /validate/name/get-gender | Get the gender of a first name
+*CMNameApi* | [**nameIdentifier**](docs/CMNameApi.md#nameidentifier) | **POST** /validate/name/identifier | Validate a code identifier
 *CMNameApi* | [**nameValidateFirstName**](docs/CMNameApi.md#namevalidatefirstname) | **POST** /validate/name/first | Validate a first name
 *CMNameApi* | [**nameValidateFullName**](docs/CMNameApi.md#namevalidatefullname) | **POST** /validate/name/full-name | Parse and validate a full name
 *CMNameApi* | [**nameValidateLastName**](docs/CMNameApi.md#namevalidatelastname) | **POST** /validate/name/last | Validate a last name
 *CMPhoneNumberApi* | [**phoneNumberSyntaxOnly**](docs/CMPhoneNumberApi.md#phonenumbersyntaxonly) | **POST** /validate/phonenumber/basic | Validate phone number (basic)
-*CMVatApi* | [**vatVatLookup**](docs/CMVatApi.md#vatvatlookup) | **POST** /validate/vat/lookup | Lookup a VAT code
+*CMUserAgentApi* | [**userAgentParse**](docs/CMUserAgentApi.md#useragentparse) | **POST** /validate/useragent/parse | Parse an HTTP User-Agent string, identify robots
+*CMVatApi* | [**vatVatLookup**](docs/CMVatApi.md#vatvatlookup) | **POST** /validate/vat/lookup | Validate a VAT number
 
 
 ## Documentation For Models
@@ -144,13 +168,28 @@ Class | Method | HTTP request | Description
  - [CMGeolocateResponse](docs/CMGeolocateResponse.md)
  - [CMGetGenderRequest](docs/CMGetGenderRequest.md)
  - [CMGetGenderResponse](docs/CMGetGenderResponse.md)
+ - [CMGetTimezonesRequest](docs/CMGetTimezonesRequest.md)
+ - [CMGetTimezonesResponse](docs/CMGetTimezonesResponse.md)
  - [CMLastNameValidationRequest](docs/CMLastNameValidationRequest.md)
  - [CMLastNameValidationResponse](docs/CMLastNameValidationResponse.md)
+ - [CMLeadEnrichmentRequest](docs/CMLeadEnrichmentRequest.md)
+ - [CMLeadEnrichmentResponse](docs/CMLeadEnrichmentResponse.md)
  - [CMParseAddressRequest](docs/CMParseAddressRequest.md)
  - [CMParseAddressResponse](docs/CMParseAddressResponse.md)
  - [CMPhoneNumberValidateRequest](docs/CMPhoneNumberValidateRequest.md)
  - [CMPhoneNumberValidationResponse](docs/CMPhoneNumberValidationResponse.md)
+ - [CMTimezone](docs/CMTimezone.md)
+ - [CMUserAgentValidateRequest](docs/CMUserAgentValidateRequest.md)
+ - [CMUserAgentValidateResponse](docs/CMUserAgentValidateResponse.md)
+ - [CMValidateAddressRequest](docs/CMValidateAddressRequest.md)
+ - [CMValidateAddressResponse](docs/CMValidateAddressResponse.md)
+ - [CMValidateCountryRequest](docs/CMValidateCountryRequest.md)
+ - [CMValidateCountryResponse](docs/CMValidateCountryResponse.md)
+ - [CMValidateIdentifierRequest](docs/CMValidateIdentifierRequest.md)
+ - [CMValidateIdentifierResponse](docs/CMValidateIdentifierResponse.md)
+ - [CMValidateUrlRequestFull](docs/CMValidateUrlRequestFull.md)
  - [CMValidateUrlRequestSyntaxOnly](docs/CMValidateUrlRequestSyntaxOnly.md)
+ - [CMValidateUrlResponseFull](docs/CMValidateUrlResponseFull.md)
  - [CMValidateUrlResponseSyntaxOnly](docs/CMValidateUrlResponseSyntaxOnly.md)
  - [CMVatLookupRequest](docs/CMVatLookupRequest.md)
  - [CMVatLookupResponse](docs/CMVatLookupResponse.md)

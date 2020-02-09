@@ -45,6 +45,9 @@
 @property(nonatomic) NSString* postalCode;
 /* Country of the address, if present in the address.  If not included in the address it will be null. [optional]
  */
-@property(nonatomic) NSString* country;
+@property(nonatomic) NSString* countryFullName;
+/* Two-letter ISO 3166-1 country code [optional]
+ */
+@property(nonatomic) NSString* iSOTwoLetterCode;
 
 @end

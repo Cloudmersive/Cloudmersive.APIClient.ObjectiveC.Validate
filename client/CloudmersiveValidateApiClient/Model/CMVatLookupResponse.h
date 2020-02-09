@@ -22,15 +22,41 @@
 
 @interface CMVatLookupResponse : CMObject
 
-
+/* Two-letter country code [optional]
+ */
 @property(nonatomic) NSString* countryCode;
-
+/* VAT number [optional]
+ */
 @property(nonatomic) NSString* vatNumber;
-
+/* True if the VAT code is valid, false otherwise [optional]
+ */
 @property(nonatomic) NSNumber* isValid;
-
+/* Name of the business [optional]
+ */
 @property(nonatomic) NSString* businessName;
-
+/* Business address as a single string [optional]
+ */
 @property(nonatomic) NSString* businessAddress;
+/* For the business address, the name of the building, house or structure if applicable, such as \"Cloudmersive Building 2\".  This will often by null. [optional]
+ */
+@property(nonatomic) NSString* businessBuilding;
+/* For the business address, the street number or house number of the address.  For example, in the address \"1600 Pennsylvania Avenue NW\" the street number would be \"1600\".  This value will typically be populated for most addresses. [optional]
+ */
+@property(nonatomic) NSString* businessStreetNumber;
+/* For the business address, the name of the street or road of the address.  For example, in the address \"1600 Pennsylvania Avenue NW\" the street number would be \"Pennsylvania Avenue NW\". [optional]
+ */
+@property(nonatomic) NSString* businessStreet;
+/* For the business address, the city of the address. [optional]
+ */
+@property(nonatomic) NSString* businessCity;
+/* For the business address, the state or province of the address. [optional]
+ */
+@property(nonatomic) NSString* businessStateOrProvince;
+/* For the business address, the postal code or zip code of the address. [optional]
+ */
+@property(nonatomic) NSString* businessPostalCode;
+/* For the business address, country of the address, if present in the address.  If not included in the address it will be null. [optional]
+ */
+@property(nonatomic) NSString* businessCountry;
 
 @end

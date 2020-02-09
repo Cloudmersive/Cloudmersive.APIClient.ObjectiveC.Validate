@@ -25,5 +25,14 @@
 /* True if the email address is syntactically valid, false if it is not [optional]
  */
 @property(nonatomic) NSNumber* validAddress;
+/* Domain name of the email address [optional]
+ */
+@property(nonatomic) NSString* domain;
+/* True if the email domain name is a free provider (typically a free to sign up web email provider for consumers / personal use), false otherwise. [optional]
+ */
+@property(nonatomic) NSNumber* isFreeEmailProvider;
+/* True if the email address is a disposable email address, false otherwise; these disposable providers are not typically used to receive email and so will have a low likelihood of opening mail sent there. [optional]
+ */
+@property(nonatomic) NSNumber* isDisposable;
 
 @end
