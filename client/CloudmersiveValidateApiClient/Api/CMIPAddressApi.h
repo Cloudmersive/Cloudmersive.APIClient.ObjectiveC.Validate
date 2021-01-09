@@ -1,5 +1,11 @@
 #import <Foundation/Foundation.h>
+#import "CMBotCheckResponse.h"
 #import "CMGeolocateResponse.h"
+#import "CMGeolocateStreetAddressResponse.h"
+#import "CMIPIntelligenceResponse.h"
+#import "CMIPReverseDNSLookupResponse.h"
+#import "CMIPThreatResponse.h"
+#import "CMTorNodeResponse.h"
 #import "CMApi.h"
 
 /**
@@ -23,6 +29,66 @@ extern NSInteger kCMIPAddressApiMissingParamErrorCode;
 
 -(instancetype) initWithApiClient:(CMApiClient *)apiClient NS_DESIGNATED_INITIALIZER;
 
+/// Geolocate an IP address to a street address
+/// Identify an IP address's street address.  Useful for security and UX applications.
+///
+/// @param value IP address to geolocate, e.g. \&quot;55.55.55.55\&quot;.  The input is a string so be sure to enclose it in double-quotes.
+/// 
+///  code:200 message:"OK"
+///
+/// @return CMGeolocateStreetAddressResponse*
+-(NSURLSessionTask*) iPAddressGeolocateStreetAddressWithValue: (NSString*) value
+    completionHandler: (void (^)(CMGeolocateStreetAddressResponse* output, NSError* error)) handler;
+
+
+/// Get intelligence on an IP address
+/// Identify key intelligence about an IP address, including if it is a known threat IP, known bot, Tor exit node, as well as the location of the IP address.
+///
+/// @param value IP address to process, e.g. \&quot;55.55.55.55\&quot;.  The input is a string so be sure to enclose it in double-quotes.
+/// 
+///  code:200 message:"OK"
+///
+/// @return CMIPIntelligenceResponse*
+-(NSURLSessionTask*) iPAddressIpIntelligenceWithValue: (NSString*) value
+    completionHandler: (void (^)(CMIPIntelligenceResponse* output, NSError* error)) handler;
+
+
+/// Check if IP address is a Bot client
+/// Check if the input IP address is a Bot, robot, or otherwise a non-user entity.  Leverages real-time signals to check against known high-probability bots..
+///
+/// @param value IP address to check, e.g. \&quot;55.55.55.55\&quot;.  The input is a string so be sure to enclose it in double-quotes.
+/// 
+///  code:200 message:"OK"
+///
+/// @return CMBotCheckResponse*
+-(NSURLSessionTask*) iPAddressIsBotWithValue: (NSString*) value
+    completionHandler: (void (^)(CMBotCheckResponse* output, NSError* error)) handler;
+
+
+/// Check if IP address is a known threat
+/// Check if the input IP address is a known threat IP address.  Checks against known bad IPs, botnets, compromised servers, and other lists of threats.
+///
+/// @param value IP address to check, e.g. \&quot;55.55.55.55\&quot;.  The input is a string so be sure to enclose it in double-quotes.
+/// 
+///  code:200 message:"OK"
+///
+/// @return CMIPThreatResponse*
+-(NSURLSessionTask*) iPAddressIsThreatWithValue: (NSString*) value
+    completionHandler: (void (^)(CMIPThreatResponse* output, NSError* error)) handler;
+
+
+/// Check if IP address is a Tor node server
+/// Check if the input IP address is a Tor exit node server.  Tor servers are a type of privacy-preserving technology that can hide the original IP address who makes a request.
+///
+/// @param value IP address to check, e.g. \&quot;55.55.55.55\&quot;.  The input is a string so be sure to enclose it in double-quotes.
+/// 
+///  code:200 message:"OK"
+///
+/// @return CMTorNodeResponse*
+-(NSURLSessionTask*) iPAddressIsTorNodeWithValue: (NSString*) value
+    completionHandler: (void (^)(CMTorNodeResponse* output, NSError* error)) handler;
+
+
 /// Geolocate an IP address
 /// Identify an IP address Country, State/Provence, City, Zip/Postal Code, etc.  Useful for security and UX applications.
 ///
@@ -33,6 +99,18 @@ extern NSInteger kCMIPAddressApiMissingParamErrorCode;
 /// @return CMGeolocateResponse*
 -(NSURLSessionTask*) iPAddressPostWithValue: (NSString*) value
     completionHandler: (void (^)(CMGeolocateResponse* output, NSError* error)) handler;
+
+
+/// Perform a reverse domain name (DNS) lookup on an IP address
+/// Gets the domain name, if any, associated with the IP address.
+///
+/// @param value IP address to check, e.g. \&quot;55.55.55.55\&quot;.  The input is a string so be sure to enclose it in double-quotes.
+/// 
+///  code:200 message:"OK"
+///
+/// @return CMIPReverseDNSLookupResponse*
+-(NSURLSessionTask*) iPAddressReverseDomainLookupWithValue: (NSString*) value
+    completionHandler: (void (^)(CMIPReverseDNSLookupResponse* output, NSError* error)) handler;
 
 
 

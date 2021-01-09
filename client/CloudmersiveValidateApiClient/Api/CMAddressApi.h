@@ -1,12 +1,22 @@
 #import <Foundation/Foundation.h>
+#import "CMCountryListResult.h"
 #import "CMGetTimezonesRequest.h"
 #import "CMGetTimezonesResponse.h"
+#import "CMNormalizeAddressResponse.h"
 #import "CMParseAddressRequest.h"
 #import "CMParseAddressResponse.h"
+#import "CMReverseGeocodeAddressRequest.h"
+#import "CMReverseGeocodeAddressResponse.h"
 #import "CMValidateAddressRequest.h"
 #import "CMValidateAddressResponse.h"
+#import "CMValidateCityRequest.h"
+#import "CMValidateCityResponse.h"
 #import "CMValidateCountryRequest.h"
 #import "CMValidateCountryResponse.h"
+#import "CMValidatePostalCodeRequest.h"
+#import "CMValidatePostalCodeResponse.h"
+#import "CMValidateStateRequest.h"
+#import "CMValidateStateResponse.h"
 #import "CMApi.h"
 
 /**
@@ -30,8 +40,20 @@ extern NSInteger kCMAddressApiMissingParamErrorCode;
 
 -(instancetype) initWithApiClient:(CMApiClient *)apiClient NS_DESIGNATED_INITIALIZER;
 
+/// Check if a country is a member of the European Union (EU)
+/// Checks if the input country is a member of the European Union or not.
+///
+/// @param input Input request
+/// 
+///  code:200 message:"OK"
+///
+/// @return CMValidateCountryResponse*
+-(NSURLSessionTask*) addressCheckEUMembershipWithInput: (CMValidateCountryRequest*) input
+    completionHandler: (void (^)(CMValidateCountryResponse* output, NSError* error)) handler;
+
+
 /// Validate and normalize country information, return ISO 3166-1 country codes and country name
-/// Validates and normalizes country information, and returns key information about a country.  Also returns distinct time zones in the country.
+/// Validates and normalizes country information, and returns key information about a country, as well as whether it is a member of the European Union.  Also returns distinct time zones in the country.
 ///
 /// @param input Input request
 /// 
@@ -39,6 +61,53 @@ extern NSInteger kCMAddressApiMissingParamErrorCode;
 ///
 /// @return CMValidateCountryResponse*
 -(NSURLSessionTask*) addressCountryWithInput: (CMValidateCountryRequest*) input
+    completionHandler: (void (^)(CMValidateCountryResponse* output, NSError* error)) handler;
+
+
+/// Get a list of ISO 3166-1 countries
+/// Enumerates the list of ISO 3166-1 countries, including name, country codes, and more.
+///
+/// 
+///  code:200 message:"OK"
+///
+/// @return CMCountryListResult*
+-(NSURLSessionTask*) addressCountryListWithCompletionHandler: 
+    (void (^)(CMCountryListResult* output, NSError* error)) handler;
+
+
+/// Geocode a street address into latitude and longitude
+/// Geocodes a street address into latitude and longitude.
+///
+/// @param input Input parse request
+/// 
+///  code:200 message:"OK"
+///
+/// @return CMValidateAddressResponse*
+-(NSURLSessionTask*) addressGeocodeWithInput: (CMValidateAddressRequest*) input
+    completionHandler: (void (^)(CMValidateAddressResponse* output, NSError* error)) handler;
+
+
+/// Get the currency of the input country
+/// Gets the currency information for the input country, including the ISO three-letter country code, currency symbol, and English currency name.
+///
+/// @param input Input request
+/// 
+///  code:200 message:"OK"
+///
+/// @return CMValidateCountryResponse*
+-(NSURLSessionTask*) addressGetCountryCurrencyWithInput: (CMValidateCountryRequest*) input
+    completionHandler: (void (^)(CMValidateCountryResponse* output, NSError* error)) handler;
+
+
+/// Get the region, subregion and continent of the country
+/// Gets the continent information including region and subregion for the input country.
+///
+/// @param input Input request
+/// 
+///  code:200 message:"OK"
+///
+/// @return CMValidateCountryResponse*
+-(NSURLSessionTask*) addressGetCountryRegionWithInput: (CMValidateCountryRequest*) input
     completionHandler: (void (^)(CMValidateCountryResponse* output, NSError* error)) handler;
 
 
@@ -54,6 +123,18 @@ extern NSInteger kCMAddressApiMissingParamErrorCode;
     completionHandler: (void (^)(CMGetTimezonesResponse* output, NSError* error)) handler;
 
 
+/// Normalize a street address
+/// Normalizes an input structured street address is valid or invalid.  If the address is valid, also returns the latitude and longitude of the address.  Supports all major international addresses.
+///
+/// @param input Input parse request
+/// 
+///  code:200 message:"OK"
+///
+/// @return CMNormalizeAddressResponse*
+-(NSURLSessionTask*) addressNormalizeAddressWithInput: (CMValidateAddressRequest*) input
+    completionHandler: (void (^)(CMNormalizeAddressResponse* output, NSError* error)) handler;
+
+
 /// Parse an unstructured input text string into an international, formatted address
 /// Uses machine learning and Natural Language Processing (NLP) to handle a wide array of cases, including non-standard and unstructured address strings across a wide array of countries and address formatting norms.
 ///
@@ -66,8 +147,20 @@ extern NSInteger kCMAddressApiMissingParamErrorCode;
     completionHandler: (void (^)(CMParseAddressResponse* output, NSError* error)) handler;
 
 
+/// Reverse geocode a lattitude and longitude into an address
+/// Converts lattitude and longitude coordinates into an address through reverse-geocoding.
+///
+/// @param input Input reverse geocoding request
+/// 
+///  code:200 message:"OK"
+///
+/// @return CMReverseGeocodeAddressResponse*
+-(NSURLSessionTask*) addressReverseGeocodeAddressWithInput: (CMReverseGeocodeAddressRequest*) input
+    completionHandler: (void (^)(CMReverseGeocodeAddressResponse* output, NSError* error)) handler;
+
+
 /// Validate a street address
-/// Determines if an input structured street address is valid or invalid.  If the address is valid, also returns the latitude and longitude of the address.
+/// Determines if an input structured street address is valid or invalid.  If the address is valid, also returns the latitude and longitude of the address.  Supports all major international addresses.
 ///
 /// @param input Input parse request
 /// 
@@ -76,6 +169,42 @@ extern NSInteger kCMAddressApiMissingParamErrorCode;
 /// @return CMValidateAddressResponse*
 -(NSURLSessionTask*) addressValidateAddressWithInput: (CMValidateAddressRequest*) input
     completionHandler: (void (^)(CMValidateAddressResponse* output, NSError* error)) handler;
+
+
+/// Validate a City and State/Province combination, get location information about it
+/// Checks if the input city and state name or code is valid, and returns information about it such as normalized City name, State name and more.  Supports all major international addresses.
+///
+/// @param input Input parse request
+/// 
+///  code:200 message:"OK"
+///
+/// @return CMValidateCityResponse*
+-(NSURLSessionTask*) addressValidateCityWithInput: (CMValidateCityRequest*) input
+    completionHandler: (void (^)(CMValidateCityResponse* output, NSError* error)) handler;
+
+
+/// Validate a postal code, get location information about it
+/// Checks if the input postal code is valid, and returns information about it such as City, State and more.  Supports all major countries.
+///
+/// @param input Input parse request
+/// 
+///  code:200 message:"OK"
+///
+/// @return CMValidatePostalCodeResponse*
+-(NSURLSessionTask*) addressValidatePostalCodeWithInput: (CMValidatePostalCodeRequest*) input
+    completionHandler: (void (^)(CMValidatePostalCodeResponse* output, NSError* error)) handler;
+
+
+/// Validate a state or province, name or abbreviation, get location information about it
+/// Checks if the input state name or code is valid, and returns information about it such as normalized State name and more.  Supports all major countries.
+///
+/// @param input Input parse request
+/// 
+///  code:200 message:"OK"
+///
+/// @return CMValidateStateResponse*
+-(NSURLSessionTask*) addressValidateStateWithInput: (CMValidateStateRequest*) input
+    completionHandler: (void (^)(CMValidateStateResponse* output, NSError* error)) handler;
 
 
 

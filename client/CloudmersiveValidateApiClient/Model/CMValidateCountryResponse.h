@@ -40,8 +40,26 @@
 /* Three-letter ISO 3166-1 country code [optional]
  */
 @property(nonatomic) NSString* threeLetterCode;
+/* True if this country is currently a member of the European Union (EU), false otherwise [optional]
+ */
+@property(nonatomic) NSNumber* isEuropeanUnionMember;
 /* Time zones (IANA/Olsen) in the country [optional]
  */
 @property(nonatomic) NSArray<CMTimezone>* timezones;
+/* ISO 4217 currency three-letter code associated with the country [optional]
+ */
+@property(nonatomic) NSString* iSOCurrencyCode;
+/* Symbol associated with the currency [optional]
+ */
+@property(nonatomic) NSString* currencySymbol;
+/* Full name of the currency [optional]
+ */
+@property(nonatomic) NSString* currencyEnglishName;
+/* Region (continent) in which the country is located; possible values are None, Europe, Americas, Asia, Africa, Oceania [optional]
+ */
+@property(nonatomic) NSString* region;
+/* Subregion in which the country is located; possible values are None, NorthernEurope, WesternEurope, SouthernEurope, EasternEurope, CentralAmerica, NorthernAmerica, SouthAmerica, EasternAfrica, MiddleAfrica, NorthernAfrica , SouthernAfrica , WesternAfrica , CentralAsia , EasternAsia , SouthernAsia , SouthEasternAsia , WesternAsia , Southern , Middle , AustraliaandNewZealand , Melanesia , Polynesia , Micronesia , Caribbean, [optional]
+ */
+@property(nonatomic) NSString* subregion;
 
 @end

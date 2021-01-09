@@ -2,6 +2,7 @@
 #import "CMQueryParamCollection.h"
 #import "CMApiClient.h"
 #import "CMCheckResponse.h"
+#import "CMDomainQualityResponse.h"
 #import "CMValidateUrlRequestFull.h"
 #import "CMValidateUrlRequestSyntaxOnly.h"
 #import "CMValidateUrlResponseFull.h"
@@ -91,7 +92,7 @@ NSInteger kCMDomainApiMissingParamErrorCode = 234513;
     NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
 
     // request content type
-    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[@"text/javascript", @"application/json", @"text/json"]];
+    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[@"application/json", @"text/json"]];
 
     // Authentication setting
     NSArray *authSettings = @[@"Apikey"];
@@ -157,7 +158,7 @@ NSInteger kCMDomainApiMissingParamErrorCode = 234513;
     NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
 
     // request content type
-    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[@"text/javascript", @"application/json", @"text/json"]];
+    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[@"application/json", @"text/json"]];
 
     // Authentication setting
     NSArray *authSettings = @[@"Apikey"];
@@ -182,6 +183,72 @@ NSInteger kCMDomainApiMissingParamErrorCode = 234513;
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
                                     handler((CMWhoisResponse*)data, error);
+                                }
+                            }];
+}
+
+///
+/// Validate a domain name's quality score
+/// Check the quality of a domain name.  Supports over 9 million domain names.  Higher quality scores indicate more trust and authority in the domain name, with values ranging from 0.0 (low quality) to 10.0 (maximum quality).
+///  @param domain Domain name to check, for example \"cloudmersive.com\". 
+///
+///  @returns CMDomainQualityResponse*
+///
+-(NSURLSessionTask*) domainQualityScoreWithDomain: (NSString*) domain
+    completionHandler: (void (^)(CMDomainQualityResponse* output, NSError* error)) handler {
+    // verify the required parameter 'domain' is set
+    if (domain == nil) {
+        NSParameterAssert(domain);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"domain"] };
+            NSError* error = [NSError errorWithDomain:kCMDomainApiErrorDomain code:kCMDomainApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/validate/domain/quality-score"];
+
+    NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
+
+    NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
+    [headerParams addEntriesFromDictionary:self.defaultHeaders];
+    // HTTP header `Accept`
+    NSString *acceptHeader = [self.apiClient.sanitizer selectHeaderAccept:@[@"application/json", @"text/json", @"application/xml", @"text/xml"]];
+    if(acceptHeader.length > 0) {
+        headerParams[@"Accept"] = acceptHeader;
+    }
+
+    // response content type
+    NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
+
+    // request content type
+    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[@"application/json", @"text/json"]];
+
+    // Authentication setting
+    NSArray *authSettings = @[@"Apikey"];
+
+    id bodyParam = nil;
+    NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
+    bodyParam = domain;
+
+    return [self.apiClient requestWithPath: resourcePath
+                                    method: @"POST"
+                                pathParams: pathParams
+                               queryParams: queryParams
+                                formParams: formParams
+                                     files: localVarFiles
+                                      body: bodyParam
+                              headerParams: headerParams
+                              authSettings: authSettings
+                        requestContentType: requestContentType
+                       responseContentType: responseContentType
+                              responseType: @"CMDomainQualityResponse*"
+                           completionBlock: ^(id data, NSError *error) {
+                                if(handler) {
+                                    handler((CMDomainQualityResponse*)data, error);
                                 }
                             }];
 }

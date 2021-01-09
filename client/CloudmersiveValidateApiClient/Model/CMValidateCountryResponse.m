@@ -17,7 +17,7 @@
  * This method is used by `JSONModel`.
  */
 + (JSONKeyMapper *)keyMapper {
-  return [[JSONKeyMapper alloc] initWithModelToJSONDictionary:@{ @"successful": @"Successful", @"countryFullName": @"CountryFullName", @"iSOTwoLetterCode": @"ISOTwoLetterCode", @"fIPSTwoLetterCode": @"FIPSTwoLetterCode", @"threeLetterCode": @"ThreeLetterCode", @"timezones": @"Timezones" }];
+  return [[JSONKeyMapper alloc] initWithModelToJSONDictionary:@{ @"successful": @"Successful", @"countryFullName": @"CountryFullName", @"iSOTwoLetterCode": @"ISOTwoLetterCode", @"fIPSTwoLetterCode": @"FIPSTwoLetterCode", @"threeLetterCode": @"ThreeLetterCode", @"isEuropeanUnionMember": @"IsEuropeanUnionMember", @"timezones": @"Timezones", @"iSOCurrencyCode": @"ISOCurrencyCode", @"currencySymbol": @"CurrencySymbol", @"currencyEnglishName": @"CurrencyEnglishName", @"region": @"Region", @"subregion": @"Subregion" }];
 }
 
 /**
@@ -27,7 +27,7 @@
  */
 + (BOOL)propertyIsOptional:(NSString *)propertyName {
 
-  NSArray *optionalProperties = @[@"successful", @"countryFullName", @"iSOTwoLetterCode", @"fIPSTwoLetterCode", @"threeLetterCode", @"timezones"];
+  NSArray *optionalProperties = @[@"successful", @"countryFullName", @"iSOTwoLetterCode", @"fIPSTwoLetterCode", @"threeLetterCode", @"isEuropeanUnionMember", @"timezones", @"iSOCurrencyCode", @"currencySymbol", @"currencyEnglishName", @"region", @"subregion"];
   return [optionalProperties containsObject:propertyName];
 }
 

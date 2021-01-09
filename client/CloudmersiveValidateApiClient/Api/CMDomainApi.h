@@ -1,5 +1,6 @@
 #import <Foundation/Foundation.h>
 #import "CMCheckResponse.h"
+#import "CMDomainQualityResponse.h"
 #import "CMValidateUrlRequestFull.h"
 #import "CMValidateUrlRequestSyntaxOnly.h"
 #import "CMValidateUrlResponseFull.h"
@@ -50,6 +51,18 @@ extern NSInteger kCMDomainApiMissingParamErrorCode;
 /// @return CMWhoisResponse*
 -(NSURLSessionTask*) domainPostWithDomain: (NSString*) domain
     completionHandler: (void (^)(CMWhoisResponse* output, NSError* error)) handler;
+
+
+/// Validate a domain name's quality score
+/// Check the quality of a domain name.  Supports over 9 million domain names.  Higher quality scores indicate more trust and authority in the domain name, with values ranging from 0.0 (low quality) to 10.0 (maximum quality).
+///
+/// @param domain Domain name to check, for example \&quot;cloudmersive.com\&quot;.
+/// 
+///  code:200 message:"OK"
+///
+/// @return CMDomainQualityResponse*
+-(NSURLSessionTask*) domainQualityScoreWithDomain: (NSString*) domain
+    completionHandler: (void (^)(CMDomainQualityResponse* output, NSError* error)) handler;
 
 
 /// Validate a URL fully
